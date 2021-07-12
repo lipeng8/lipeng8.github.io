@@ -1,23 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/07/03/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="quick-start"><a class="markdownIt-Anchor" href="#quick-start"></a> Quick Start</h2>
-<h3 id="create-a-new-post"><a class="markdownIt-Anchor" href="#create-a-new-post"></a> Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<span id="more"></span>
-<h3 id="run-server"><a class="markdownIt-Anchor" href="#run-server"></a> Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files"><a class="markdownIt-Anchor" href="#generate-static-files"></a> Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites"><a class="markdownIt-Anchor" href="#deploy-to-remote-sites"></a> Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <title>使用 Hexo+GitHub 搭建个人免费博客教程</title>
+    <url>/2021/07/12/%E4%BD%BF%E7%94%A8-Hexo-GitHub-%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%85%8D%E8%B4%B9%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<pre><code>近些年来很多用户都喜欢使用 GitHub Pages 来搭建 Hexo 静态博客网站，其最吸引人的莫过于完全免费使用，并且非常稳定。
+虽然搭建时比较麻烦，有点折腾，但是配置完成后，基本不需要操心维护的事，甚至放了几年都忘记了，打开来看文章依然还在。
+本文就详细介绍下如何使用 Hexo + GitHub 搭建免费个人博客网站的教程。
+</code></pre> <span id="more"></span>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><h4 id="GitHub-Pages-是什么？"><a href="#GitHub-Pages-是什么？" class="headerlink" title="GitHub Pages 是什么？"></a>GitHub Pages 是什么？</h4><pre><code>[What is GitHub Pages? - GitHub Help](https://docs.github.com/en/github/working-with-github-pages/about-github-pages)
+GitHub Pages 是由 GitHub 官方提供的一种免费的静态站点托管服务，让我们可以在 GitHub 仓库里托管和发布自己的静态网站页面。
+</code></pre><h4 id="Hexo-是什么？"><a href="#Hexo-是什么？" class="headerlink" title="Hexo 是什么？"></a>Hexo 是什么？</h4><pre><code>官网：[hexo.io](https://hexo.io/zh-cn/)
+Hexo 是一个快速、简洁且高效的静态博客框架，它基于 Node.js 运行，可以将我们撰写的 Markdown 文档解析渲染成静态的 HTML 网页。
+</code></pre><h4 id="Hexo-GitHub-文章发布原理"><a href="#Hexo-GitHub-文章发布原理" class="headerlink" title="Hexo + GitHub 文章发布原理"></a>Hexo + GitHub 文章发布原理</h4><pre><code>在本地撰写 Markdown 格式文章后，通过 Hexo 解析文档，渲染生成具有主题样式的 HTML 静态网页，再推送到 GitHub 上完成博文的发布。
+</code></pre><p><img data-src="/images/20210712/20210302205757822_8864.jpg" alt="1"></p>
+<h4 id="优点和不足"><a href="#优点和不足" class="headerlink" title="优点和不足"></a>优点和不足</h4><pre><code>优点：完全免费；静态站点，轻量快速；可按需求自由定制改造；托管在 GitHub，安全省心；迁移方便……
+不足：发文不便，依赖于本地环境；更适合个人博客使用；GitHub 在国内访问速度有点不快可以考虑切换到码云。
+</code></pre><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><pre><code>输入代码时，核对准确，最好切换成英文输入法；
+将文中的 “用户名” 和 “邮箱” 替换为自己的 GitHub 账户名和绑定的邮箱；
+统一使用 Git Bash 进行操作（支持 Win、Mac）；
+</code></pre><h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><pre><code>Hexo 基于 Node.js，搭建过程中还需要使用 npm（Node.js 已带） 和 git，因此先搭建本地操作环境，安装 Node.js 和 Git。
+Node.js：https://nodejs.org/zh-cn
+Git：https://git-scm.com/downloads
+下载 Node.js 和 Git 程序并安装，一路点 “下一步” 按默认配置完成安装。
+安装完成后，Win+R 输入 cmd 并打开，依次输入 node -v、npm -v 和 git --version 并回车，如下图出现程序版本号即可。
+</code></pre><p><img data-src="/images/20210712/20210302205659402_21843.png" alt="2"></p>
+<h4 id="连接-Github"><a href="#连接-Github" class="headerlink" title="连接 Github"></a>连接 Github</h4><pre><code>使用邮箱注册 GitHub 账户，选择免费账户（Free），并完成邮件验证。
+右键 -&gt; Git Bash Here，设置用户名和邮箱：
+</code></pre><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;GitHub 用户名&quot;</span><br><span class="line">git config --global user.email &quot;GitHub 邮箱&quot;</span><br></pre></td></tr></table></figure>
+<h5 id="创建-SSH-密匙："><a href="#创建-SSH-密匙：" class="headerlink" title="创建 SSH 密匙："></a>创建 SSH 密匙：</h5><pre><code>输入 ssh-keygen -t rsa -C &quot;GitHub 邮箱&quot;，然后一路回车。
+</code></pre><h5 id="添加密匙："><a href="#添加密匙：" class="headerlink" title="添加密匙："></a>添加密匙：</h5><pre><code>进入 [C:\Users\用户名\.ssh] 目录（要勾选显示“隐藏的项目”），用记事本打开公钥 id_rsa.pub 文件并复制里面的内容。
+登陆 GitHub ，进入 Settings 页面，选择左边栏的 SSH and GPG keys，点击 New SSH key。
+Title 随便取个名字，粘贴复制的 id_rsa.pub 内容到 Key 中，点击 Add SSH key 完成添加。
+</code></pre><p><img data-src="/images/20210712/20210302210559602_8892.jpg" alt="##### "></p>
+<h5 id="验证连接："><a href="#验证连接：" class="headerlink" title="验证连接："></a>验证连接：</h5><pre><code>打开 Git Bash，输入 ssh -T git@github.com 出现 “Are you sure……”，输入 yes 回车确认。
+显示 “Hi xxx! You&#39;ve successfully……” 即连接成功。
+</code></pre><p><img data-src="/images/20210712/20210302210635984_19356.png" alt="##### "></p>
+<h5 id="创建-Github-Pages-仓库"><a href="#创建-Github-Pages-仓库" class="headerlink" title="创建 Github Pages 仓库"></a>创建 Github Pages 仓库</h5><pre><code>GitHub 主页右上角加号 -&gt; New repository：
+Repository name 中输入 用户名.github.io
+勾选 “Initialize this repository with a README”
+Description 选填
+</code></pre><p><img data-src="/images/20210712/20210302212114379_29362.png" alt=""></p>
+<pre><code>填好后点击 Create repository 创建。
+创建后默认自动启用 HTTPS，博客地址为：https://用户名.github.io
+</code></pre><h4 id="本地安装-Hexo-博客程序"><a href="#本地安装-Hexo-博客程序" class="headerlink" title="本地安装 Hexo 博客程序"></a>本地安装 Hexo 博客程序</h4><pre><code>新建一个文件夹用来存放 Hexo 的程序文件，如 Hexo-Blog。打开该文件夹，右键 -&gt; Git Bash Here。
+</code></pre><h5 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h5><pre><code>使用 npm 一键安装 Hexo 博客程序：
+</code></pre><p>   <code>npm install -g hexo-cli</code></p>
+<pre><code>Mac 用户需要管理员权限（sudo），运行这条命令：
+</code></pre><p>   <code>sudo npm install -g hexo-cli</code></p>
+<pre><code>安装时间有点久（真的很慢！），界面也没任何反应，耐心等待，安装完成后如下图。
+</code></pre><p><img data-src="/images/20210712/20210302212820075_22759.png" alt="npm install -g hexo-cli"></p>
+<h4 id="Hexo-初始化和本地预览"><a href="#Hexo-初始化和本地预览" class="headerlink" title="Hexo 初始化和本地预览"></a>Hexo 初始化和本地预览</h4><pre><code>初始化并安装所需组件：
+</code></pre><p><code>hexo init      # 初始化
+npm install    # 安装组件</code><br>    完成后依次输入下面命令，启动本地服务器进行预览：<br><code>hexo g   # 生成页面
+hexo s   # 启动预览</code><br><img data-src="/images/20210712/20210302214116810_10687.png" alt="localhost:4000"></p>
+<pre><code>访问 http://localhost:4000，出现 Hexo 默认页面，本地博客安装成功！
+Tips：如果出现页面加载不出来，可能是端口被占用了。Ctrl+C 关闭服务器，运行 hexo server -p 5000 更改端口号后重试。
+Hexo 博客文件夹目录结构如下：
+</code></pre><p><img data-src="/images/20210712/20210302214342657_16535.jpg" alt="10"></p>
+<h4 id="部署-Hexo-到-GitHub-Pages"><a href="#部署-Hexo-到-GitHub-Pages" class="headerlink" title="部署 Hexo 到 GitHub Pages"></a>部署 Hexo 到 GitHub Pages</h4><pre><code>本地博客测试成功后，就是上传到 GitHub 进行部署，使其能够在网络上访问。
+首先安装 hexo-deployer-git：
+`npm install hexo-deployer-git --save`
+然后修改 _config.yml 文件末尾的 Deployment 部分，修改成如下：
+deploy:
+  type: git
+  repository: git@github.com:用户名/用户名.github.io.git
+  branch: master
+完成后运行 hexo d 将网站上传部署到 GitHub Pages。
+完成！这时访问我们的 GitHub 域名 https://用户名.github.io 就可以看到 Hexo 网站了。
+</code></pre><h4 id="绑定域名（可选）"><a href="#绑定域名（可选）" class="headerlink" title="绑定域名（可选）"></a>绑定域名（可选）</h4><pre><code>博客搭建完成使用的是 GitHub 的子域名（用户名.http://github.io），我们可以为 Hexo 博客绑定自己的域名替换 GitHub 域名，更加个性化和专业，也利于 SEO。
+我们使用 Namesilo 进行注册，便宜好用没啥套路，使用优惠码 okoff 优惠一美元，com 域名大概 50 块一年。
+关于阿里云上域名的操作方式百度下配置方式类似
+</code></pre><p> <strong>域名注册和解析</strong></p>
+<pre><code>域名注册和解析教程：Namesilo 域名购买及使用教程
+按上面教程注册并解析域名，在 DNS 设置部分，删除自带的记录，然后添加 CNAME 记录将 www 域名解析指向 用户名.github.io。      
+</code></pre><h4 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h4><h5 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a>方式一：</h5><pre><code>Hexo 5.0.0 版本以上，推荐通过 npm 直接安装，进入博客目录执行命令：
+</code></pre><p>   <code>npm install --save hexo-theme-fluid</code></p>
+<pre><code>然后在博客目录下创建 _config.fluid.yml，将主题的 _config.yml 内容复制进去。
+</code></pre><h5 id="方式二："><a href="#方式二：" class="headerlink" title="方式二："></a>方式二：</h5><pre><code>下载 最新 release 版本 解压到 themes 目录，并将解压出的文件夹重命名为 fluid。
+</code></pre><p><strong>指定主题</strong><br>    如下修改 Hexo 博客目录中的 _config.yml：<br><code>theme: fluid  # 指定主题</code><br><code>language: zh-CN  # 指定语言，会影响主题显示的语言，按需修改</code><br><strong>创建「关于页」</strong><br>    首次使用主题的「关于页」需要手动创建：<br>  <code>hexo new page about</code></p>
+<pre><code>创建成功后，编辑博客目录下 /source/about/index.md，添加 layout 属性。
+修改后的文件示例如下：
+</code></pre><p><code>---</code><br><code>title: about</code><br><code>date: 2020-02-23 19:20:33</code><br><code>layout: about</code><br><code>---</code></p>
+<pre><code>这里写关于页的正文，支持 Markdown, HTML
+</code></pre><h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><h4 id="hexo-init未在空目录下初始化-导致初始化失败"><a href="#hexo-init未在空目录下初始化-导致初始化失败" class="headerlink" title="hexo init未在空目录下初始化 导致初始化失败"></a>hexo init未在空目录下初始化 导致初始化失败</h4><p><img data-src="/images/20210712/20210302213302849_20335.png" alt=""></p>
+<h4 id="github连接失败-原因密码不对导致（本地电脑存储了gitlab私库账户信息，博主没对多个账号进行处理导致）"><a href="#github连接失败-原因密码不对导致（本地电脑存储了gitlab私库账户信息，博主没对多个账号进行处理导致）" class="headerlink" title="github连接失败 原因密码不对导致（本地电脑存储了gitlab私库账户信息，博主没对多个账号进行处理导致）"></a>github连接失败 原因密码不对导致（本地电脑存储了gitlab私库账户信息，博主没对多个账号进行处理导致）</h4><p><strong>解决方式：</strong><br><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">（1）先重新设置本机git配置：git config --global credential.helper store</span><br><span class="line">（2）输入github账号和密码</span><br></pre></td></tr></table></figure><br><img data-src="/images/20210712/20210302213605257_8128.png" alt="git config --global credential"></p>
+<h4 id="更改hexo博客文件时无法进行github提交"><a href="#更改hexo博客文件时无法进行github提交" class="headerlink" title="更改hexo博客文件时无法进行github提交"></a>更改hexo博客文件时无法进行github提交</h4><p><strong>解决方式</strong></p>
+<pre><code>删除.deploy_git文件夹;
+输入`git config --global core.autocrlf false`
+然后，依次执行：
+</code></pre><p>   <code>hexo clean
+    hexo g
+    hexo d</code><br><img data-src="/images/20210712/20210302220322285_27412.png" alt=""></p>
+<h4 id="如果出现页面无法渲染的情况"><a href="#如果出现页面无法渲染的情况" class="headerlink" title="如果出现页面无法渲染的情况"></a>如果出现页面无法渲染的情况</h4><pre><code>修改配置文件
+</code></pre><p><img data-src="/images/20210712/20210302223252385_29196.png" alt="修改配置文件"></p>
+<h4 id="如何更换网页图标"><a href="#如何更换网页图标" class="headerlink" title="如何更换网页图标"></a>如何更换网页图标</h4><p><strong>解决办法</strong><br>               在主题页放入图标themes\fluid-1.8.8\source\img</p>
+<h4 id="无法应用名人名言api-bug"><a href="#无法应用名人名言api-bug" class="headerlink" title="无法应用名人名言api bug"></a>无法应用名人名言api bug</h4><p>1.多字段不能[‘data’，’content’] 需要[‘data.content’]<br>2.只支持api返回结果中第一个字段值为集合得情况转换<br><img data-src="/images/20210712/20210309180718864_15542.png" alt="data"></p>
+<h3 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h3><p>  <a href="https://huangpiao.tech/tags/Hexo/">https://huangpiao.tech/tags/Hexo/</a><br>  <a href="https://jiuxiaoge.github.io/2018/10/06/hexo%E5%9C%A8next%E4%B8%BB%E9%A2%98%E4%B8%8B%E5%A6%82%E4%BD%95%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE/">https://jiuxiaoge.github.io/2018/10/06/hexo%E5%9C%A8next%E4%B8%BB%E9%A2%98%E4%B8%8B%E5%A6%82%E4%BD%95%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE/</a></p>
 ]]></content>
+      <categories>
+        <category>搭建博客</category>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>搭建博客</tag>
+        <tag>hexo</tag>
+      </tags>
   </entry>
 </search>
